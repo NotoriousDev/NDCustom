@@ -13,5 +13,7 @@ public class NDCustom extends JavaPlugin
     @Override
     public void onEnable()
     {
+        getServer().getPluginManager().registerEvents(new NDCPlayerListener(this), this);
+        new NDCPlayerListener(this);
     }
 }
