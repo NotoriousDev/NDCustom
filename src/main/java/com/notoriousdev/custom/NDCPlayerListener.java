@@ -1,6 +1,5 @@
 package com.notoriousdev.custom;
 
-import com.notoriousdev.custom.NDCustom;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
