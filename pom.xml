@@ -1,0 +1,97 @@
+<!--Generally don't touch this...-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--Information about the project-->
+    <groupId>com.notoriousdev</groupId>
+    <artifactId>NDCustom</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!--More information about the project-->
+    <name>NDCustom</name>
+    <url>http://www.notoriousdev.com</url>
+
+    <!--Don't touch this either-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--Need these unless the dependency is in the main maven repo-->
+    <repositories>
+        <!--Bukkit-->
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <!--The jars that are downloaded-->
+    <dependencies>
+        <!--Bukkit-->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.4.7-R1.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <!--Lombok 'cause YOLO-->
+        <dependency> 
+            <groupId>org.projectlombok</groupId> 
+            <artifactId>lombok</artifactId> 
+            <version>0.11.6</version> 
+            <scope>provided</scope> 
+        </dependency>
+    </dependencies>
+
+    <!--Don't edit this-->
+    <build>
+        <directory>target</directory>
+        <outputDirectory>target/classes</outputDirectory>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
+        <defaultGoal>clean install</defaultGoal>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>plugin.yml</include>
+                    <include>config.yml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>2.5.1</version>
+                <configuration>
+                    <!--Java Version-->
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>NDCustom</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
