@@ -13,3 +13,17 @@
 # Do you want the plugin enabled? (This is mainly used for when we are performing checks,
 # hence why it is false be default).
 enable: false
+
+#Database connection details
+database:
+  address: localhost
+  port: 3306
+  database_name: 'test'
+  user: 'root'
+  password: 'password'
+  
+#Join/quit/kick message formats
+messages:
+  join: ''
+  quit: ''
+  kick: ''
