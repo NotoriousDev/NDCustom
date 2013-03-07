@@ -1,0 +1,15 @@
+#.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.#
+#                                                               #
+#              NDCustom Plugin Configuration file               #
+#                                                               #
+#.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.#
+
+# Welcome to NDCustom, a public custom plugin for use on the NotoriousDev servers.
+# This plugin has been custom built for the NotoriousDev servers, however it can
+# be implemented on other servers with a little Java tweaking. This config file has
+# all of the configurable options that the plugin uses, so make sure that all of
+# the options are set correctly, otherwise the plugin will not work as expected.
+
+# Do you want the plugin enabled? (This is mainly used for when we are performing checks,
+# hence why it is false be default).
+enable: false
