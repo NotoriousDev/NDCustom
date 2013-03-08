@@ -1,12 +1,24 @@
 package com.notoriousdev.custom;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
+import org.bukkit.inventory.ItemStack;
 
 public class NDCPlayerListener implements Listener {
 
@@ -31,4 +43,65 @@ public class NDCPlayerListener implements Listener {
         event.setLeaveMessage(ChatColor.RED + "Kick: " + ChatColor.GOLD + event.getPlayer().getName());
 
     }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPotionThrow(PlayerInteractEvent event)
+    {
+        Player player = event.getPlayer();
+        ItemStack item = player.getItemInHand();
+        if((item.getType() == Material.POTION) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
+        {
+            player.sendMessage(ChatColor.RED + "You cannot use potions");
+            event.setCancelled(true);
+            player.getInventory().setItemInHand(null);
+            player.updateInventory();
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBowFire(EntityShootBowEvent event)
+    {
+        if(event.getEntity() instanceof Player)
+        {
+            Player player = (Player) event.getEntity();
+            if (player.getGameMode() == GameMode.CREATIVE)
+            {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You may not use bows in creative");
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onDispenserInteract(InventoryClickEvent event)
+    {
+        Player player = (Player)event.getWhoClicked();
+        ItemStack item = event.getCurrentItem();
+        if (item != null & player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
+        {
+            event.setCancelled(true);
+            event.setCursor(null);
+            event.setCurrentItem(null);
+            player.sendMessage(ChatColor.RED + "You may not put potions into dispensers");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onCreativeDamage(EntityDamageByEntityEvent event)
+    {
+        if(event.getDamager() instanceof Player)
+        {
+            event.setCancelled(true);
+            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You may not PVP others while in Creative mode");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSkyblockDeath(PlayerDeathEvent event)
+    {
+        if(event.getEntity().getLocation().getWorld().getName().equalsIgnoreCase("skyblock") && event.getEntity().getLastDamageCause().equals(EntityDamageEvent.DamageCause.VOID))
+        {
+            event.setDeathMessage(ChatColor.RED + event.getEntity().getDisplayName() + "couldn't handle the skyblock.");
+        }
+    }
+
 }
