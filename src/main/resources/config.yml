@@ -21,9 +21,9 @@ database:
   database_name: 'test'
   user: 'root'
   password: 'password'
-  
+
 #Join/quit/kick message formats
 messages:
-  join: ''
-  quit: ''
-  kick: ''
+  join: '&aJoin:&6 %player'
+  quit: '&cQuit:&6 %player'
+  kick: '&cKick:&6 %player'

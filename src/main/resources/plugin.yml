@@ -5,7 +5,7 @@ name: NDCustom
 # Main class (The one that extends JavaPlugin, generally.)
 main: com.notoriousdev.custom.NDCustom
 # Version of the plugin (Make sure that it matches the pom.xml version) (TC Versioning?)
-version: 0.0.1-SNAPSHOT
+version: 0.0.2-SNAPSHOT
 # Authors of the plugin (Don't just add yourself. An existing author will add you if you deserve it.)
 authors: [TheReverend403, BranicYeti]
 # Website of NotoriousDev (Not really much use...)
@@ -13,19 +13,20 @@ website: http://www.notoriousdev.com
 # Commands of the plugin
 commands:
   # The base command (Sub-commands do not go here.)
-  example:
-    # Description of the command (Displayed on /help next to the command.)
-    description: Example command - Doesn't really exist
-    # Default permission state of the command (Exceptable values: false, true, OP)
-    default: false
+  ndcustom:
+    usage: Use /ndcustom reload
+    permission: ndcustom.admin
+    permission-message: You don't have permission to do that.
+    description: Main NDCustom command
+    aliases: [ndc]
 # Permissions of the plugin (Permissions can and probably will be handled in Permissions.java. Use this for parent permission nodes.)
 permissions:
   # The permission node
-  permission.node:
+  ndcustom.admin:
     # Description of the permission node
-    description: Example permission node
+    description: Grants all permissions to use NDCustom
     # Default permission state (Exceptable values: false, true, OP)
-    default: false
+    default: OP
     # Children permission nodes (Permissions that are inherited by this permission node.)
     children:
       # The permission nodes that are inherited (Always true for parent nodes.)

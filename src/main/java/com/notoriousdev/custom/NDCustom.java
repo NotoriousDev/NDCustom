@@ -19,7 +19,9 @@ public class NDCustom extends JavaPlugin
     @Override
     public void onEnable()
     {
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new NDCPlayerListener(this), this);
+        getCommand("ndcustom").setExecutor(new NDCCommandExecutor(this));
         getLogger().info("NDCustom Enabled!");
     }
 }

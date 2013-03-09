@@ -33,22 +33,23 @@ public class NDCPlayerListener implements Listener
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event)
     {
-        event.setJoinMessage(ChatColor.GREEN + "Join: " + ChatColor.GOLD + event.getPlayer().getName());
-
+        event.setJoinMessage(ChatColor.translateAlternateColorCodes
+                ('&', plugin.getConfig().getString("messages.join").replaceAll("%player", event.getPlayer().getDisplayName())));
     }
 
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event)
     {
-        event.setQuitMessage(ChatColor.RED + "Quit: " + ChatColor.GOLD + event.getPlayer().getName());
+        event.setQuitMessage(ChatColor.translateAlternateColorCodes
+                ('&', plugin.getConfig().getString("messages.quit").replaceAll("%player", event.getPlayer().getDisplayName())));
 
     }
 
     @EventHandler
     public void onPlayerKick(final PlayerKickEvent event)
     {
-        event.setLeaveMessage(ChatColor.RED + "Kick: " + ChatColor.GOLD + event.getPlayer().getName());
-
+        event.setLeaveMessage(ChatColor.translateAlternateColorCodes
+                ('&', plugin.getConfig().getString("messages.kick").replaceAll("%player", event.getPlayer().getDisplayName())));
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -56,14 +57,16 @@ public class NDCPlayerListener implements Listener
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
-        if ((item.getType() == Material.POTION) || item.getType() == Material.EXP_BOTTLE && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
+        if ((item.getType() == Material.POTION) || item.getType() == Material.EXP_BOTTLE && (event.getAction() == Action.RIGHT_CLICK_AIR
+                || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
         {
             player.sendMessage(ChatColor.RED + "You cannot use potions in creative!");
             event.setCancelled(true);
             player.getInventory().setItemInHand(null);
             player.updateInventory();
         }
-        if ((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS) && (event.getAction() == Action.RIGHT_CLICK_BLOCK))
+        if ((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS)
+                && (event.getAction() == Action.RIGHT_CLICK_BLOCK))
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use monster eggs in creative!");
