@@ -89,9 +89,6 @@ public class NDCPlayerListener implements Listener {
                 event.setCurrentItem(null);
                 player.sendMessage(ChatColor.RED + "You cannot put " + item.getType().name().toLowerCase().replace("_"," ") + "s into dispensers!");
             }
-        } else
-        {
-            return;
         }
     }
 
@@ -109,7 +106,7 @@ public class NDCPlayerListener implements Listener {
     public void onSkyblockDeath(PlayerDeathEvent event)
     {
         Player player = event.getEntity();
-        if(player.getLastDamageCause().equals(EntityDamageEvent.DamageCause.VOID))
+        if(player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID)
         {
             if(player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
             {
