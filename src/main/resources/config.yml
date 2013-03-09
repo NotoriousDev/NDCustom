@@ -24,6 +24,8 @@ database:
 
 #Join/quit/kick message formats
 messages:
-  join: '&aJoin:&6 %player'
-  quit: '&cQuit:&6 %player'
-  kick: '&cKick:&6 %player'
+  join: '&aJoin &8||&6 %player'
+  quit: '&cQuit &8||&6 %player'
+  kick: '&cKick &8||&6 %player'
+  skyblock-fall: '&a%player &ccouldn''t handle the skyblock...'
+  generic-death: '&a%player &cdied of an unknown cause...'
