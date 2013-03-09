@@ -48,7 +48,7 @@ public class NDCPlayerListener implements Listener {
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
-        if((item.getType() == Material.POTION) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
+        if((item.getType() == Material.POTION) || item.getType() == Material.EXP_BOTTLE  && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
         {
             player.sendMessage(ChatColor.RED + "You cannot use potions in creative!");
             event.setCancelled(true);
@@ -82,12 +82,12 @@ public class NDCPlayerListener implements Listener {
         Player player = (Player)event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
         if (item != null) {
-            if (player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION || item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
+            if (player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION || item.getType() == Material.EXP_BOTTLE || item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
             {
                 event.setCancelled(true);
                 event.setCursor(null);
                 event.setCurrentItem(null);
-                player.sendMessage(ChatColor.RED + "You may not put that into a dispenser!");
+                player.sendMessage(ChatColor.RED + "You may not put " + item.getType().name().toLowerCase().replace("_"," ") + "s into a dispenser!");
             }
         } else
         {
@@ -113,11 +113,11 @@ public class NDCPlayerListener implements Listener {
         {
             if(player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
             {
-                event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " couldn't handle the skyblock.");
+                event.setDeathMessage(ChatColor.RED + player.getDisplayName() + " couldn't handle the skyblock.");
             }
             else
             {
-                event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " died of unknown causes...");
+                event.setDeathMessage(ChatColor.RED + player.getDisplayName() + " died of unknown causes...");
             }
         }
     }
