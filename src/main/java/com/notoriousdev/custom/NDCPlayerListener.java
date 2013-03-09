@@ -106,7 +106,7 @@ public class NDCPlayerListener implements Listener
     {
         if (event.getDamager() instanceof Player)
         {
-            Player player = (Player) event.getEntity();
+            Player player = (Player) event.getDamager();
             if (player.getGameMode() == GameMode.CREATIVE)
             {
                 event.setCancelled(true);
