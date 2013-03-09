@@ -115,15 +115,9 @@ public class NDCPlayerListener implements Listener
     public void onSkyblockDeath(PlayerDeathEvent event)
     {
         Player player = event.getEntity();
-        if (player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
+        if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID && player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
         {
-            if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID)
-            {
-                event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.RED + " couldn't handle the skyblock.");
-            } else
-            {
-                event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.RED + " died of unknown causes...");
-            }
+            event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.RED + " couldn't handle the skyblock.");
         } else
         {
             event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.RED + " died of unknown causes...");
