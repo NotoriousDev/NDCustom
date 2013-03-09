@@ -106,8 +106,12 @@ public class NDCPlayerListener implements Listener
     {
         if (event.getDamager() instanceof Player)
         {
-            event.setCancelled(true);
-            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You cannot PVP others while in creative!");
+            Player player = (Player) event.getEntity();
+            if (player.getGameMode() == GameMode.CREATIVE)
+            {
+                event.setCancelled(true);
+                ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You cannot PVP others while in creative!");
+            }
         }
     }
 
