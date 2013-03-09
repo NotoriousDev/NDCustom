@@ -46,20 +46,20 @@ public class MySQL
 
     public void register(String playername, String email, String password) throws SQLException, MalformedURLException, IOException
     {
-        String hash = plugin.utils.postPasswordHash(password);
-        String id;
-        PreparedStatement ps = conn.prepareStatement("SELECT password,user_email,user_id FROM phpbb_users WHERE username_clean=?;");
-        ps.setString(1, playername.toLowerCase());
-        ResultSet rs = ps.executeQuery();
-        String _password = rs.getString(1);
-        String _email = rs.getString(2);
-        id = String.valueOf(rs.getInt(3));
-        rs.close();
-        ps.close();
-        if (_password.equals(hash) && _email.equals(email)) {
-            conn.createStatement().executeUpdate(String.format("UPDATE phpbb_acl_users SET auth_role_id=2 WHERE user_id=%s", id));
-        } else {
-            plugin.getServer().getPlayer(playername).sendMessage("Error");
-        }
+//        String hash = plugin.utils.postPasswordHash(password);
+//        String id;
+//        PreparedStatement ps = conn.prepareStatement("SELECT password,user_email,user_id FROM phpbb_users WHERE username_clean=?;");
+//        ps.setString(1, playername.toLowerCase());
+//        ResultSet rs = ps.executeQuery();
+//        String _password = rs.getString(1);
+//        String _email = rs.getString(2);
+//        id = String.valueOf(rs.getInt(3));
+//        rs.close();
+//        ps.close();
+//        if (_password.equals(hash) && _email.equals(email)) {
+//            conn.createStatement().executeUpdate(String.format("UPDATE phpbb_acl_users SET auth_role_id=2 WHERE user_id=%s", id));
+//        } else {
+//            plugin.getServer().getPlayer(playername).sendMessage("Error");
+//        }
     }
 }
