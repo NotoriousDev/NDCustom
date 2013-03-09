@@ -81,12 +81,12 @@ public class NDCPlayerListener implements Listener {
     {
         Player player = (Player)event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
-        if (item != null & player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
+        if (item != null & player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION || item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
         {
             event.setCancelled(true);
             event.setCursor(null);
             event.setCurrentItem(null);
-            player.sendMessage(ChatColor.RED + "You may not put potions into dispensers!");
+            player.sendMessage(ChatColor.RED + "You may not put that into a dispenser!");
         }
     }
 
@@ -108,11 +108,11 @@ public class NDCPlayerListener implements Listener {
         {
             if(player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
             {
-                event.setDeathMessage(ChatColor.RED + player.getDisplayName() + " couldn't handle the skyblock.");
+                event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " couldn't handle the skyblock.");
             }
             else
             {
-                event.setDeathMessage(ChatColor.RED + player.getDisplayName() + " died of unknown causes...");
+                event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " died of unknown causes...");
             }
         }
     }
