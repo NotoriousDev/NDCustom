@@ -50,7 +50,7 @@ public class NDCPlayerListener implements Listener {
         ItemStack item = player.getItemInHand();
         if((item.getType() == Material.POTION) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getGameMode() == GameMode.CREATIVE)
         {
-            player.sendMessage(ChatColor.RED + "You cannot use potions");
+            player.sendMessage(ChatColor.RED + "You cannot use potions in creative!");
             event.setCancelled(true);
             player.getInventory().setItemInHand(null);
             player.updateInventory();
@@ -58,7 +58,7 @@ public class NDCPlayerListener implements Listener {
         if((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS) && (event.getAction() == Action.RIGHT_CLICK_BLOCK))
         {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You cannot use monster eggs.");
+            player.sendMessage(ChatColor.RED + "You cannot use monster eggs in creative!");
         }
     }
 
@@ -71,7 +71,7 @@ public class NDCPlayerListener implements Listener {
             if (player.getGameMode() == GameMode.CREATIVE)
             {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You may not use bows in creative");
+                player.sendMessage(ChatColor.RED + "You may not use bows in creative!");
             }
         }
     }
@@ -86,7 +86,7 @@ public class NDCPlayerListener implements Listener {
             event.setCancelled(true);
             event.setCursor(null);
             event.setCurrentItem(null);
-            player.sendMessage(ChatColor.RED + "You may not put potions into dispensers");
+            player.sendMessage(ChatColor.RED + "You may not put potions into dispensers!");
         }
     }
 
@@ -96,7 +96,7 @@ public class NDCPlayerListener implements Listener {
         if(event.getDamager() instanceof Player)
         {
             event.setCancelled(true);
-            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You may not PVP others while in Creative mode");
+            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You may not PVP others while in creative!");
         }
     }
 
@@ -106,7 +106,9 @@ public class NDCPlayerListener implements Listener {
         Player player = event.getEntity();
         if(player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock") && player.getLastDamageCause().equals(EntityDamageEvent.DamageCause.VOID))
         {
-            event.setDeathMessage(ChatColor.RED + player.getDisplayName() + "couldn't handle the skyblock.");
+            event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " couldn't handle the skyblock.");
+        } else {
+            event.setDeathMessage(ChatColor.GOLD + "[Skyblock]" + ChatColor.RED + player.getDisplayName() + " died of unknown causes...");
         }
     }
 }
