@@ -55,6 +55,11 @@ public class NDCPlayerListener implements Listener {
             player.getInventory().setItemInHand(null);
             player.updateInventory();
         }
+        if((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS) && (event.getAction() == Action.RIGHT_CLICK_BLOCK))
+        {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot use monster eggs.");
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
