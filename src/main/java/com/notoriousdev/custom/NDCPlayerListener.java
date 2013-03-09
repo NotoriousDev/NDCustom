@@ -81,12 +81,17 @@ public class NDCPlayerListener implements Listener {
     {
         Player player = (Player)event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
-        if (item != null & player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION || item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
+        if (item != null) {
+            if (player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType().equals(InventoryType.DISPENSER) && item.getType() == Material.POTION || item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS && (event.isLeftClick() || event.isRightClick() || event.isShiftClick()))
+            {
+                event.setCancelled(true);
+                event.setCursor(null);
+                event.setCurrentItem(null);
+                player.sendMessage(ChatColor.RED + "You may not put that into a dispenser!");
+            }
+        } else
         {
-            event.setCancelled(true);
-            event.setCursor(null);
-            event.setCurrentItem(null);
-            player.sendMessage(ChatColor.RED + "You may not put that into a dispenser!");
+            return;
         }
     }
 
