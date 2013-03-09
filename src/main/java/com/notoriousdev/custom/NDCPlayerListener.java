@@ -71,7 +71,7 @@ public class NDCPlayerListener implements Listener {
             if (player.getGameMode() == GameMode.CREATIVE)
             {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You may not use bows in creative!");
+                player.sendMessage(ChatColor.RED + "You cannot use bows in creative!");
             }
         }
     }
@@ -87,7 +87,7 @@ public class NDCPlayerListener implements Listener {
                 event.setCancelled(true);
                 event.setCursor(null);
                 event.setCurrentItem(null);
-                player.sendMessage(ChatColor.RED + "You may not put " + item.getType().name().toLowerCase().replace("_"," ") + "s into a dispenser!");
+                player.sendMessage(ChatColor.RED + "You cannot put " + item.getType().name().toLowerCase().replace("_"," ") + "s into dispensers!");
             }
         } else
         {
@@ -101,7 +101,7 @@ public class NDCPlayerListener implements Listener {
         if(event.getDamager() instanceof Player)
         {
             event.setCancelled(true);
-            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You may not PVP others while in creative!");
+            ((Player) event.getDamager()).sendMessage(ChatColor.RED + "You cannot PVP others while in creative!");
         }
     }
 
