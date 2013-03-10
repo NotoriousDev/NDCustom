@@ -29,3 +29,16 @@ messages:
   kick: '&cKick &8||&6 %player'
   skyblock-fall: '&a%player &ccouldn''t handle the skyblock...'
   generic-death: '&a%player &cdied of an unknown cause...'
+  commands:
+    op:
+      player: 'Yeah, no.'
+      server: '&c%player% &1just tried to be a massive faggot by using /op.'
+    deop:
+      player: 'Yo'' cray cray! You can''t do that!'
+      server: '&c%player% &1just tried to be a massive faggot by using /deop.'
+    reload:
+      player: 'Uh-huh. Uh-huh. Nuh-uh. Fgt.'
+      server: '&c%player% &1just tried to be a massive faggot by using /reload.'
+    stop:
+      player: 'HAHAHAHAHAHAHA, umad bro?'
+      server: '&c%player% &1just tried to be a massive faggot by using /stop.'
