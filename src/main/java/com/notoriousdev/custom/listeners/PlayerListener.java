@@ -40,7 +40,6 @@ public class PlayerListener implements Listener
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
-            player.getInventory().setItemInHand(null);
         }
         if ((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS)
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
@@ -48,7 +47,6 @@ public class PlayerListener implements Listener
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
-            player.getInventory().setItemInHand(null);
         }
     }
 
@@ -86,7 +84,6 @@ public class PlayerListener implements Listener
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s into dispensers!");
             event.setCursor(null);
-            event.setCurrentItem(null);
         }
 
     }
