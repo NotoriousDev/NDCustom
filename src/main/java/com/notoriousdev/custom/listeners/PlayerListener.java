@@ -15,19 +15,20 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class PlayerListener implements Listener
 {
-    
+
     private final NDCustom plugin;
-    
+
     public PlayerListener(NDCustom plugin)
     {
         this.plugin = plugin;
     }
-    
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPotionThrow(PlayerInteractEvent event)
     {
@@ -48,7 +49,7 @@ public class PlayerListener implements Listener
             player.getInventory().setItemInHand(null);
         }
     }
-    
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBowFire(EntityShootBowEvent event)
     {
@@ -60,7 +61,17 @@ public class PlayerListener implements Listener
             }
         }
     }
-    
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onItemDrop(PlayerDropItemEvent event)
+    {
+        if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
+        {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop items in creative!");
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDispenserInteract(InventoryClickEvent event)
     {
@@ -74,9 +85,9 @@ public class PlayerListener implements Listener
             event.setCursor(null);
             event.setCurrentItem(null);
         }
-        
+
     }
-    
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCreativeDamage(EntityDamageByEntityEvent event)
     {
@@ -88,7 +99,7 @@ public class PlayerListener implements Listener
             }
         }
     }
-    
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSkyblockDeath(PlayerDeathEvent event)
     {
