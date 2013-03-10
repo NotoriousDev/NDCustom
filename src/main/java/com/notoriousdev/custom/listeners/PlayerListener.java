@@ -38,14 +38,16 @@ public class PlayerListener implements Listener
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                 && player.getGameMode() == GameMode.CREATIVE) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
+                    .name().toLowerCase().replace("_", " ") + "s in creative!");
             player.getInventory().setItemInHand(null);
         }
         if ((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS)
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
                 && player.getGameMode() == GameMode.CREATIVE) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
+                    .name().toLowerCase().replace("_", " ") + "s in creative!");
             player.getInventory().setItemInHand(null);
         }
     }
@@ -57,7 +59,7 @@ public class PlayerListener implements Listener
             Player player = (Player) event.getEntity();
             if (player.getGameMode() == GameMode.CREATIVE) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", player.getDisplayName())));
+                player.sendMessage(ChatColor.RED + "You cannot use bows in creative!");
             }
         }
     }
@@ -81,7 +83,8 @@ public class PlayerListener implements Listener
                 && (item.getType() == Material.POTION || item.getType() == Material.EXP_BOTTLE || item.getType() == Material.MONSTER_EGG
                 || item.getType() == Material.MONSTER_EGGS || item.getType() == Material.ARROW)) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", player.getDisplayName().replace("{ITEM}", item.getType().name().toLowerCase().replace("_", " ")))));
+            player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
+                    .name().toLowerCase().replace("_", " ") + "s into dispensers!");
             event.setCursor(null);
             event.setCurrentItem(null);
         }
@@ -95,7 +98,7 @@ public class PlayerListener implements Listener
             Player player = (Player) event.getDamager();
             if (player.getGameMode() == GameMode.CREATIVE) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", player.getDisplayName())));
+                player.sendMessage(ChatColor.RED + "You cannot PVP while in creative mode, dumbass!");
             }
         }
     }

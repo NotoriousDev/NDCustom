@@ -24,21 +24,21 @@ database:
 
 #Join/quit/kick message formats
 messages:
-  join: '&aJoin &8||&6 %player'
-  quit: '&cQuit &8||&6 %player'
-  kick: '&cKick &8||&6 %player'
-  skyblock-fall: '&a%player &ccouldn''t handle the skyblock...'
-  generic-death: '&a%player &cdied of an unknown cause...'
+  join: '&aJoin &8||&6 {PLAYER}'
+  quit: '&cQuit &8||&6 {PLAYER}'
+  kick: '&cKick &8||&6 {PLAYER}'
+  skyblock-fall: '&c[DEATH] &8||&a {PLAYER} &acouldn''t handle the skyblock...'
+  generic-death: '&c[DEATH] &8||&a {PLAYER} &adied of an unknown cause...'
   commands:
     op:
-      player: 'Yeah, no.'
-      server: '&c%player% &1just tried to be a massive faggot by using /op.'
+      player: '&cYeah, no.'
+      server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/op'
     deop:
-      player: 'Yo'' cray cray! You can''t do that!'
-      server: '&c%player% &1just tried to be a massive faggot by using /deop.'
+      player: '&cYo'' cray cray! You can''t do that!'
+      server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/deop'
     reload:
-      player: 'Uh-huh. Uh-huh. Nuh-uh. Fgt.'
-      server: '&c%player% &1just tried to be a massive faggot by using /reload.'
+      player: '&cUh-huh. Uh-huh. Nuh-uh. Fgt.'
+      server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/reload'
     stop:
-      player: 'HAHAHAHAHAHAHA, umad bro?'
-      server: '&c%player% &1just tried to be a massive faggot by using /stop.'
+      player: '&cNice try, but no.'
+      server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/stop'
