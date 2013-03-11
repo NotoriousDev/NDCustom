@@ -30,20 +30,19 @@ public class PlayerListener implements Listener
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPotionThrow(PlayerInteractEvent event)
+    public void onItemThrow(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
-        if ((item.getType() == Material.POTION || item.getType() == Material.EXP_BOTTLE)
-                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                && player.getGameMode() == GameMode.CREATIVE) {
-            event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
-                    .name().toLowerCase().replace("_", " ") + "s in creative!");
-        }
-        if ((item.getType() == Material.MONSTER_EGG || item.getType() == Material.MONSTER_EGGS)
-                && event.getAction() == Action.RIGHT_CLICK_BLOCK
-                && player.getGameMode() == GameMode.CREATIVE) {
+        if ((player.getGameMode() == GameMode.CREATIVE
+                && event.getAction() == Action.RIGHT_CLICK_AIR
+                || event.getAction() == Action.RIGHT_CLICK_BLOCK
+                && item.getType() == Material.POTION
+                || item.getType() == Material.EXP_BOTTLE)
+                || item.getType() == Material.SNOW_BALL
+                || item.getType() == Material.EGG
+                || item.getType() == Material.MONSTER_EGG
+                || item.getType() == Material.MONSTER_EGGS) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
@@ -77,9 +76,15 @@ public class PlayerListener implements Listener
     {
         Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
-        if ((item != null && player.getGameMode() == GameMode.CREATIVE && event.getInventory().getType() == InventoryType.DISPENSER)
-                && (item.getType() == Material.POTION || item.getType() == Material.EXP_BOTTLE || item.getType() == Material.MONSTER_EGG
-                || item.getType() == Material.MONSTER_EGGS || item.getType() == Material.ARROW)) {
+        if ((item != null && player.getGameMode() == GameMode.CREATIVE
+                && event.getInventory().getType() == InventoryType.DISPENSER)
+                && (item.getType() == Material.POTION
+                || item.getType() == Material.EXP_BOTTLE
+                || item.getType() == Material.MONSTER_EGG
+                || item.getType() == Material.MONSTER_EGGS
+                || item.getType() == Material.ARROW)
+                || item.getType() == Material.SNOW_BALL
+                || item.getType() == Material.EGG) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s into dispensers!");
