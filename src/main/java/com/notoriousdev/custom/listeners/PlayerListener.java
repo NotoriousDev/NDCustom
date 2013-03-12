@@ -148,7 +148,8 @@ public class PlayerListener implements Listener
                 } else {
                     // Deny chat
                     event.setCancelled(true);
-                    player.sendMessage("");
+                    player.sendMessage(ChatColor.GREEN + "You may only speak once every 5 seconds!");
+                    player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
                 }
             } else {
                 lastMessage.put(player, current);
