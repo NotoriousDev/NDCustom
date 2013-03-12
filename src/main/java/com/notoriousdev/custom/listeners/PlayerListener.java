@@ -47,7 +47,9 @@ public class PlayerListener implements Listener
                 || item.getType() == Material.SNOW_BALL
                 || item.getType() == Material.EGG
                 || item.getType() == Material.MONSTER_EGG
-                || item.getType() == Material.MONSTER_EGGS)){
+                || item.getType() == Material.MONSTER_EGGS
+                || item.getType() == Material.EYE_OF_ENDER
+                || item.getType() == Material.ENDER_PEARL)){
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
@@ -89,7 +91,9 @@ public class PlayerListener implements Listener
                 || item.getType() == Material.MONSTER_EGGS
                 || item.getType() == Material.ARROW
                 || item.getType() == Material.SNOW_BALL
-                || item.getType() == Material.EGG)){
+                || item.getType() == Material.EGG
+                || item.getType() == Material.EYE_OF_ENDER
+                || item.getType() == Material.ENDER_PEARL)){
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s into dispensers!");
