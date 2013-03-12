@@ -14,31 +14,40 @@
 # hence why it is false be default).
 enable: false
 
-#Database connection details
-database:
-  address: localhost
-  port: 3306
-  database_name: 'test'
-  user: 'root'
-  password: 'password'
-
-#Join/quit/kick message formats
+# You can customise all of the messages that you see in Minecraft in this part of the config.
+# Some things to note with these messages:
+# &(0-9, a-f) - Colour codes. You can see the colour codes here: http://wiki.ess3.net/mc/
+# {PLAYER} - The player in question (e.g. {PLAYER} joined the server = BranicYeti joined the server.)
+# {KICKER} - The player who performed the kick/ban.
+# {KILLER} - The player/mob that kills {PLAYER}.
 messages:
-  join: '&aJoin &8||&6 {PLAYER}'
-  quit: '&cQuit &8||&6 {PLAYER}'
-  kick: '&cKick &8||&6 {PLAYER}'
-  skyblock-fall: '&c[DEATH] &8||&a {PLAYER} &acouldn''t handle the skyblock...'
-  generic-death: '&c[DEATH] &8||&a {PLAYER} &adied of an unknown cause...'
+  general:
+    join: '&aJoin &8||&6 {PLAYER}'
+    quit: '&cQuit &8||&6 {PLAYER}'
+    kick: '&cKick &8||&6 {PLAYER}'
+  death:
+    mob:
+    - '&c[DEATH] &8||&a {PLAYER} was absolutely murdered by a {KILLER}!'
+    player:
+    - '&c[DEATH] &8||&a {KILLER} went hambone on {PLAYER}''s ass!'
+    skyblock-fall: # Might rename this in the future. Just a warning. Yeti
+    - '&c[DEATH] &8||&a {PLAYER} &acouldn''t handle the skyblock...'
+    generic:
+    - '&c[DEATH] &8||&a {PLAYER} &adied of an unknown cause...'
   commands:
     op:
+      disable-use: true
       player: '&cYeah, no.'
       server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/op'
     deop:
+      disable-use: true
       player: '&cYo'' cray cray! You can''t do that!'
       server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/deop'
     reload:
+      disable-use: true
       player: '&cUh-huh. Uh-huh. Nuh-uh. Fgt.'
       server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/reload'
     stop:
+      disable-use: true
       player: '&cNice try, but no.'
       server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/stop'
