@@ -128,11 +128,12 @@ public class PlayerListener implements Listener
         Player player = event.getPlayer();
         String message = event.getMessage();
 
-        // Should shut caps spammers up
+        /* Should shut caps spammers up
         if(message.length() > 6)
         {
                 ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
         }
+        */
 
         if(Permissions.CHAT_BYPASS.isAuthorised(player))
         {
