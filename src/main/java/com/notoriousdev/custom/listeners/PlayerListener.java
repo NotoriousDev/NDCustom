@@ -21,6 +21,10 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class PlayerListener implements Listener
 {
 
@@ -117,14 +121,35 @@ public class PlayerListener implements Listener
         }
     }
 
-    @EventHandler
+    @EventHandler //(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
         Player player = event.getPlayer();
-        if (Permissions.CHAT.isAuthorised(player)) {
+        Date lastMessageTimestamp = new Date();
+        String message = event.getMessage();
+        long millisecondsSinceLastMessage = (new Date()).getTime() - lastMessageTimestamp.getTime();
+
+        // Should shut caps spammers up
+        if(message.length() > 6)
+        {
+                ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
+        }
+
+        if (Permissions.CHAT.isAuthorised(player))
+        {
+            if (millisecondsSinceLastMessage < 5000)
+            {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.GREEN + "You may only speak once every 5 seconds!");
+                player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
+                return;
+            }
             return;
         }
-        event.setCancelled(true);
-        player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
+        else
+        {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
+        }
     }
 }
