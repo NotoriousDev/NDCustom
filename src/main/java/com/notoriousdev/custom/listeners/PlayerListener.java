@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -53,6 +54,16 @@ public class PlayerListener implements Listener
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
+        }
+        if (item.getTypeId() == 387)
+        {
+            for (Player staff : plugin.getServer().getOnlinePlayers())
+            {
+                if (staff.hasPermission("ndcustom.book"))
+                {
+                    staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
+                }
+            }
         }
     }
 
