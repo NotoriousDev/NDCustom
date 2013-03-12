@@ -120,7 +120,7 @@ public class PlayerListener implements Listener
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
         Player player = event.getPlayer();
-        if (Permissions.NDCUSTOM_CHAT.isAuthorised(player)) {
+        if (Permissions.CHAT.isAuthorised(player)) {
             return;
         }
         event.setCancelled(true);
