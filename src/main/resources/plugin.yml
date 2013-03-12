@@ -7,7 +7,7 @@ main: com.notoriousdev.custom.NDCustom
 # Version of the plugin (Make sure that it matches the pom.xml version) (TC Versioning?)
 version: "${project.version}"
 # Authors of the plugin (Don't just add yourself. An existing author will add you if you deserve it.)
-authors: [TheReverend403, BranicYeti]
+authors: [TheReverend403, BranicYeti, GunfighterJ]
 # Website of NotoriousDev (Not really much use...)
 website: http://www.notoriousdev.com
 # Commands of the plugin
