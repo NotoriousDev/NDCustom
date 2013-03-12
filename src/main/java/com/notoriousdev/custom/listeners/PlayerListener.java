@@ -150,6 +150,7 @@ public class PlayerListener implements Listener
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.GREEN + "You may only speak once every 5 seconds!");
                     player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
+                    plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
                 }
             } else {
                 lastMessage.put(player, current);
@@ -159,6 +160,7 @@ public class PlayerListener implements Listener
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
+            plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
         }
     }
 }
