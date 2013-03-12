@@ -134,12 +134,12 @@ public class PlayerListener implements Listener
                 ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
         }
 
+        if(Permissions.CHAT_BYPASS.isAuthorised(player))
+        {
+            return;
+        }
         if (Permissions.CHAT.isAuthorised(player))
         {
-            if(Permissions.CHAT_BYPASS.isAuthorised(player))
-            {
-                return;
-            }
             Long current = new Date().getTime();
             if (lastMessage.containsKey(player)) {
                 if(current - lastMessage.get(player) > 3000 && !event.isCancelled()) {
