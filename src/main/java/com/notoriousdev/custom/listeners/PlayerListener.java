@@ -29,6 +29,7 @@ public class PlayerListener implements Listener
 {
 
     private final NDCustom plugin;
+    private Map<Player, Long> lastMessage = new HashMap<Player, Long>();
 
     public PlayerListener(NDCustom plugin)
     {
@@ -125,9 +126,7 @@ public class PlayerListener implements Listener
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
         Player player = event.getPlayer();
-        Date lastMessageTimestamp = new Date();
         String message = event.getMessage();
-        long millisecondsSinceLastMessage = (new Date()).getTime() - lastMessageTimestamp.getTime();
 
         // Should shut caps spammers up
         if(message.length() > 6)
@@ -137,14 +136,19 @@ public class PlayerListener implements Listener
 
         if (Permissions.CHAT.isAuthorised(player))
         {
-            if (millisecondsSinceLastMessage < 5000)
-            {
-                event.setCancelled(true);
-                player.sendMessage(ChatColor.GREEN + "You may only speak once every 5 seconds!");
-                player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
-                return;
+            Long current = new Date().getTime();
+            if (lastMessage.containsKey(player)) {
+                if(current - lastMessage.get(player) > 5000 && !event.isCancelled()) {
+                    // Allow chat
+                    lastMessage.put(player, current);
+                } else {
+                    // Deny chat
+                    event.setCancelled(true);
+                    player.sendMessage("");
+                }
+            } else {
+                lastMessage.put(player, current);
             }
-            return;
         }
         else
         {
