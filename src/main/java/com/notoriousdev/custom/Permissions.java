@@ -6,6 +6,7 @@ public enum Permissions
 {
 
     COMMAND_NDCUSTOM,
+    CHAT,
     COMMAND_OP,
     COMMAND_DEOP,
     COMMAND_RELOAD,
