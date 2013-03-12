@@ -1,6 +1,7 @@
 package com.notoriousdev.custom.listeners;
 
 import com.notoriousdev.custom.NDCustom;
+import com.notoriousdev.custom.Permissions;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
