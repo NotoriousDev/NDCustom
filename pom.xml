@@ -7,7 +7,7 @@
     <groupId>com.notoriousdev</groupId>
     <artifactId>NDCustom</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
 
     <!--More information about the project-->
     <name>NDCustom</name>
@@ -37,11 +37,11 @@
             <type>jar</type>
         </dependency>
         <!--Lombok 'cause YOLO-->
-        <dependency> 
-            <groupId>org.projectlombok</groupId> 
-            <artifactId>lombok</artifactId> 
-            <version>0.11.6</version> 
-            <scope>provided</scope> 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>0.11.6</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

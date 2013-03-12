@@ -128,11 +128,12 @@ public class PlayerListener implements Listener
         Player player = event.getPlayer();
         String message = event.getMessage();
 
-        // Should shut caps spammers up
+        /* Should shut caps spammers up
         if(message.length() > 6)
         {
                 ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
         }
+        */
 
         if(Permissions.CHAT_BYPASS.isAuthorised(player))
         {
@@ -148,7 +149,9 @@ public class PlayerListener implements Listener
                 } else {
                     // Deny chat
                     event.setCancelled(true);
-                    player.sendMessage("");
+                    player.sendMessage(ChatColor.GREEN + "You may only speak once every 3 seconds!");
+                    player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
+                    plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
                 }
             } else {
                 lastMessage.put(player, current);
@@ -158,6 +161,7 @@ public class PlayerListener implements Listener
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
+            plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
         }
     }
 }
