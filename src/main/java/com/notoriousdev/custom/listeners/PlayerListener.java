@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -113,5 +114,16 @@ public class PlayerListener implements Listener
             // Random death messages? Random death messages.
             event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
         }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent event)
+    {
+        Player player = event.getPlayer();
+        if (Permissions.NDCUSTOM_CHAT.isAuthorised(player)) {
+            return;
+        }
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
     }
 }
