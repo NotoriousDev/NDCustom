@@ -20,11 +20,16 @@ enable: false
 # {PLAYER} - The player in question (e.g. {PLAYER} joined the server = BranicYeti joined the server.)
 # {KICKER} - The player who performed the kick/ban.
 # {KILLER} - The player/mob that kills {PLAYER}.
+# {ITEM} - The item that {PLAYER} is incorrectly using.
 messages:
   general:
     join: '&aJoin &8||&6 {PLAYER}'
     quit: '&cQuit &8||&6 {PLAYER}'
     kick: '&cKick &8||&6 {PLAYER}'
+  chat:
+    spam: '&cDude, shut up!'
+    caps: '&cTurn off your capslock, bro!'
+    time: '&cYou talk too much. Wait 3 seconds between messages.'
   death:
     mob:
     - '&c[DEATH] &8||&a {PLAYER} was absolutely murdered by a {KILLER}!'
@@ -34,6 +39,9 @@ messages:
     - '&c[DEATH] &8||&a {PLAYER} &acouldn''t handle the skyblock...'
     generic:
     - '&c[DEATH] &8||&a {PLAYER} &adied of an unknown cause...'
+  itemblock:
+    dispenser: '&cYou may not put {ITEM}''s in a dispenser.'
+    throw: '&cYou may not throw {ITEM}''s.'
   commands:
     op:
       disable-use: true
