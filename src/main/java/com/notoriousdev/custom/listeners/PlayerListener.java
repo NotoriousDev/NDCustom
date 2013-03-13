@@ -19,6 +19,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -52,11 +53,15 @@ public class PlayerListener implements Listener
         }
         if (item.getType() == Material.WRITTEN_BOOK)
         {
-            for (Player staff : plugin.getServer().getOnlinePlayers())
+            BookMeta bm = (BookMeta) item.getItemMeta();
+            if (cfg.getStringList("messages.alerts.books").contains(bm.getTitle()))
             {
-                if (Permissions.BOOK.isAuthorised(staff))
+                for (Player staff : plugin.getServer().getOnlinePlayers())
                 {
-                    staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
+                    if (Permissions.BOOK.isAuthorised(staff))
+                    {
+                        staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
+                    }
                 }
             }
         }
