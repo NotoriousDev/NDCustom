@@ -26,6 +26,10 @@ messages:
     join: '&aJoin &8||&6 {PLAYER}'
     quit: '&cQuit &8||&6 {PLAYER}'
     kick: '&cKick &8||&6 {PLAYER}'
+  alerts:
+    books:
+    - 'Rules'
+    - 'How2Build'
   chat:
     spam: '&cDude, shut up!'
     caps: '&cTurn off your capslock, bro!'
