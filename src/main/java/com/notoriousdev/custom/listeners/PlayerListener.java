@@ -93,7 +93,7 @@ public class PlayerListener implements Listener
         ItemStack item = event.getCurrentItem();
         if (item != null && player.getGameMode() == GameMode.CREATIVE
                 && event.getInventory().getType() == InventoryType.DISPENSER
-                && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())))
+                && (cfg.getList("itemblock.dispenser").contains(item.getType().toString().toLowerCase())))
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
