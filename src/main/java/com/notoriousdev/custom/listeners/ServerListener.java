@@ -41,22 +41,26 @@ public class ServerListener implements Listener
     @EventHandler
     public void onPlayerCommand(final PlayerCommandPreprocessEvent event)
     {
-        if (event.getMessage().startsWith("/op") && !Permissions.COMMAND_OP.isAuthorised(event.getPlayer())) {
+        if (event.getMessage().startsWith("/op") && !Permissions.COMMAND_OP.isAuthorised(event.getPlayer()))
+        {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.op.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.op.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
         }
-        if (event.getMessage().startsWith("/deop") && !Permissions.COMMAND_DEOP.isAuthorised(event.getPlayer())) {
+        if (event.getMessage().startsWith("/deop") && !Permissions.COMMAND_DEOP.isAuthorised(event.getPlayer()))
+        {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.deop.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.deop.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
         }
-        if (event.getMessage().startsWith("/reload") && !Permissions.COMMAND_RELOAD.isAuthorised(event.getPlayer())) {
+        if (event.getMessage().startsWith("/reload") && !Permissions.COMMAND_RELOAD.isAuthorised(event.getPlayer()))
+        {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
         }
-        if (event.getMessage().startsWith("/stop") && !Permissions.COMMAND_STOP.isAuthorised(event.getPlayer())) {
+        if (event.getMessage().startsWith("/stop") && !Permissions.COMMAND_STOP.isAuthorised(event.getPlayer()))
+        {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));

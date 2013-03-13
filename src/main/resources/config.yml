@@ -51,3 +51,24 @@ messages:
       disable-use: true
       player: '&cNice try, but no.'
       server: '&c[FAIL] &8|| &a{PLAYER} &afailed at using &a/stop'
+
+itemblock:
+  dispenser:
+    - potion
+    - exp_bottle
+    - monster_egg
+    - monster_eggs
+    - arrow
+    - snow_ball
+    - egg
+    - eye_of_ender
+    - ender_pearl
+  throw:
+    - potion
+    - exp_bottle
+    - snow_ball
+    - egg
+    - monster_egg
+    - monster_eggs
+    - eye_of_ender
+    - ender_pearl

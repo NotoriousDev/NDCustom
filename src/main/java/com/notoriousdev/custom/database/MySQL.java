@@ -1,6 +1,7 @@
 package com.notoriousdev.custom.database;
 
 import com.notoriousdev.custom.NDCustom;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
@@ -38,7 +39,8 @@ public class MySQL
 
     public void kill() throws SQLException
     {
-        if (conn != null) {
+        if (conn != null)
+        {
             conn.close();
             conn = null;
         }

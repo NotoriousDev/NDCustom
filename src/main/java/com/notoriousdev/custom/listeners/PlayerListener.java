@@ -9,18 +9,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,11 +30,13 @@ public class PlayerListener implements Listener
 {
 
     private final NDCustom plugin;
+    private final FileConfiguration cfg;
     private Map<Player, Long> lastMessage = new HashMap<Player, Long>();
 
     public PlayerListener(NDCustom plugin)
     {
         this.plugin = plugin;
+        this.cfg = plugin.getConfig();
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -42,24 +44,17 @@ public class PlayerListener implements Listener
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
-        if (player.getGameMode() == GameMode.CREATIVE
-                && (item.getType() == Material.POTION
-                || item.getType() == Material.EXP_BOTTLE
-                || item.getType() == Material.SNOW_BALL
-                || item.getType() == Material.EGG
-                || item.getType() == Material.MONSTER_EGG
-                || item.getType() == Material.MONSTER_EGGS
-                || item.getType() == Material.EYE_OF_ENDER
-                || item.getType() == Material.ENDER_PEARL)){
+        if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())))
+        {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
         }
-        if (item.getTypeId() == 387)
+        if (item.getType() == Material.WRITTEN_BOOK)
         {
             for (Player staff : plugin.getServer().getOnlinePlayers())
             {
-                if (staff.hasPermission("ndcustom.book"))
+                if (Permissions.BOOK.isAuthorised(staff))
                 {
                     staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
                 }
@@ -70,9 +65,11 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBowFire(EntityShootBowEvent event)
     {
-        if (event.getEntity() instanceof Player) {
+        if (event.getEntity() instanceof Player)
+        {
             Player player = (Player) event.getEntity();
-            if (player.getGameMode() == GameMode.CREATIVE) {
+            if (player.getGameMode() == GameMode.CREATIVE)
+            {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You cannot use bows in creative!");
             }
@@ -96,15 +93,8 @@ public class PlayerListener implements Listener
         ItemStack item = event.getCurrentItem();
         if (item != null && player.getGameMode() == GameMode.CREATIVE
                 && event.getInventory().getType() == InventoryType.DISPENSER
-                && (item.getType() == Material.POTION
-                || (item.getType() == Material.EXP_BOTTLE)
-                || item.getType() == Material.MONSTER_EGG
-                || item.getType() == Material.MONSTER_EGGS
-                || item.getType() == Material.ARROW
-                || item.getType() == Material.SNOW_BALL
-                || item.getType() == Material.EGG
-                || item.getType() == Material.EYE_OF_ENDER
-                || item.getType() == Material.ENDER_PEARL)){
+                && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())))
+        {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
                     .name().toLowerCase().replace("_", " ") + "s into dispensers!");
@@ -116,9 +106,11 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCreativeDamage(EntityDamageByEntityEvent event)
     {
-        if (event.getDamager() instanceof Player) {
+        if (event.getDamager() instanceof Player)
+        {
             Player player = (Player) event.getDamager();
-            if (player.getGameMode() == GameMode.CREATIVE) {
+            if (player.getGameMode() == GameMode.CREATIVE)
+            {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You cannot PVP while in creative mode, dumbass!");
             }
@@ -129,11 +121,14 @@ public class PlayerListener implements Listener
     public void onSkyblockDeath(PlayerDeathEvent event)
     {
         Player player = event.getEntity();
-        if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID && player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock")) {
-            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.skyblock-fall").replace("{PLAYER}", player.getDisplayName())));
-        } else {
+        if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID && player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
+        {
+            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.skyblock-fall").replace("{PLAYER}", player.getDisplayName())));
+        }
+        else
+        {
             // Random death messages? Random death messages.
-            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
+            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
         }
     }
 
@@ -150,25 +145,31 @@ public class PlayerListener implements Listener
         }
         */
 
-        if(Permissions.CHAT_BYPASS.isAuthorised(player))
+        if (Permissions.CHAT_BYPASS.isAuthorised(player))
         {
             return;
         }
         if (Permissions.CHAT.isAuthorised(player))
         {
             Long current = new Date().getTime();
-            if (lastMessage.containsKey(player)) {
-                if(current - lastMessage.get(player) > 3000 && !event.isCancelled()) {
+            if (lastMessage.containsKey(player))
+            {
+                if (current - lastMessage.get(player) > 3000 && !event.isCancelled())
+                {
                     // Allow chat
                     lastMessage.put(player, current);
-                } else {
+                }
+                else
+                {
                     // Deny chat
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.GREEN + "You may only speak once every 3 seconds!");
                     player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
                     plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
                 }
-            } else {
+            }
+            else
+            {
                 lastMessage.put(player, current);
             }
         }
