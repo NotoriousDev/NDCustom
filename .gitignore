@@ -8,3 +8,4 @@
 # Directories #
 .git/
 target/
+.idea/workspace.xml
