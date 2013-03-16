@@ -53,6 +53,7 @@ public class PlayerListener implements Listener
         }
         if (item.getType() == Material.WRITTEN_BOOK)
         {
+           /*
             BookMeta bm = (BookMeta) item.getItemMeta();
             if (cfg.getStringList("messages.alerts.books").contains(bm.getTitle()))
             {
@@ -64,6 +65,7 @@ public class PlayerListener implements Listener
                     }
                 }
             }
+            */
         }
     }
 
@@ -143,7 +145,8 @@ public class PlayerListener implements Listener
         Player player = event.getPlayer();
         String message = event.getMessage();
 
-        /* Should shut caps spammers up
+        /*
+        Should shut caps spammers up
         if(message.length() > 6)
         {
                 ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
