@@ -138,7 +138,7 @@ public class PlayerListener implements Listener
             {
                 int dmg = player.getLastDamageCause().getDamage();
                 float dist = player.getFallDistance();
-                double velocity = Math.sqrt(2*9.81*dist);
+                double velocity = Math.sqrt(2*9.81*dist * 72);
                 String svel = String.valueOf(velocity);
                 svel = svel.length() > 5 ? svel.substring(0,5) : svel;
                 String sdist = String.valueOf(Math.floor(dist));
