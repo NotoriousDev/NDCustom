@@ -150,6 +150,11 @@ public class PlayerListener implements Listener
                 event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
             }
         }
+        else
+        {
+            // Random death messages? Random death messages.
+            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
+        }
     }
 
     @EventHandler //(priority = EventPriority.LOWEST)
