@@ -49,7 +49,7 @@ public class PlayerListener implements Listener
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
-                    .name().toLowerCase().replace("_", " ") + "s in creative!");
+                    .name().toLowerCase().replace("_", " ") + "s in creative because people spam them!");
         }
         if (item.getType() == Material.WRITTEN_BOOK)
         {
@@ -89,7 +89,7 @@ public class PlayerListener implements Listener
         if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
         {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop items in creative!");
+            event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop items in creative because people spam them!");
         }
     }
 
@@ -104,7 +104,7 @@ public class PlayerListener implements Listener
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot put " + item.getType()
-                    .name().toLowerCase().replace("_", " ") + "s into dispensers!");
+                    .name().toLowerCase().replace("_", " ") + "s into dispensers because people spam them!");
             event.setCursor(null);
         }
 
