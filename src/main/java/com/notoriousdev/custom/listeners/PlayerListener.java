@@ -128,10 +128,23 @@ public class PlayerListener implements Listener
     public void onSkyblockDeath(PlayerDeathEvent event)
     {
         Player player = event.getEntity();
-        if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID && player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
+        if (player.getLocation().getWorld().getName().equalsIgnoreCase("skyblock"))
         {
-            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.skyblock-fall").replace("{PLAYER}", player.getDisplayName())));
+            if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID)
+            {
+                event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.skyblock-fall").replace("{PLAYER}", player.getDisplayName())));
+            }
+            else if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL)
+            {
+                int dmg = player.getLastDamageCause().getDamage();
+                int dist = dmg * 2 + 3;
+                double velocity = Math.sqrt(2*9.81*dist);
+                String svel = String.valueOf(velocity);
+                svel = svel.length() > 5 ? svel.substring(0,5) : svel;
+                event.setDeathMessage(ChatColor.RED + "[Death]" + ChatColor.GREEN + player.getDisplayName() + " fell " + dist + " blocks, and took " + svel + " joules to the feet");
+            }
         }
+
         else
         {
             // Random death messages? Random death messages.
