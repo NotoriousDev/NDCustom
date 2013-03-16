@@ -7,7 +7,7 @@
     <groupId>com.notoriousdev</groupId>
     <artifactId>NDCustom</artifactId>
     <packaging>jar</packaging>
-    <version>${build.vcs.number}</version>
+    <version>${build.number}</version>
 
     <!--More information about the project-->
     <name>NDCustom</name>
