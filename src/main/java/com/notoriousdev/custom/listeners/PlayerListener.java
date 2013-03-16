@@ -141,7 +141,7 @@ public class PlayerListener implements Listener
                 double velocity = Math.sqrt(2*9.81*dist);
                 String svel = String.valueOf(velocity);
                 svel = svel.length() > 5 ? svel.substring(0,5) : svel;
-                event.setDeathMessage(ChatColor.RED + "[Death] " + ChatColor.GREEN + player.getDisplayName() + " fell " + dist + " blocks, and took " + svel + " joules to the feet");
+                event.setDeathMessage(ChatColor.RED + "[Death] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + " fell " + dist + " blocks, and took " + svel + " joules to the feet");
             }
         }
 
