@@ -144,12 +144,11 @@ public class PlayerListener implements Listener
                 String sdist = String.valueOf(Math.floor(dist));
                 event.setDeathMessage(ChatColor.RED + "[DEATH] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " fell " + sdist + " blocks, and took " + svel + " joules to the feet");
             }
-        }
-
-        else
-        {
-            // Random death messages? Random death messages.
-            event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
+            else
+            {
+                // Random death messages? Random death messages.
+                event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
+            }
         }
     }
 
