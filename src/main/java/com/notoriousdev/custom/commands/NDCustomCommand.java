@@ -27,28 +27,24 @@ public class NDCustomCommand implements CommandExecutor
                 sender.sendMessage(String.format("%s[%s] Version: %s", ChatColor.GREEN, plugin.getName(), plugin.getDescription().getVersion()));
                 sender.sendMessage(String.format("%s/ndcustom [reload|unload]", ChatColor.GREEN));
                 return true;
-            }
-            else if (args.length > 1)
+            } else if (args.length > 1)
             {
                 sender.sendMessage(String.format("%s[%s] Too many arguments!", ChatColor.RED, plugin.getName()));
                 sender.sendMessage(String.format("%s/ndcustom [reload|unload]", ChatColor.RED));
                 return true;
-            }
-            else
+            } else
             {
                 if (args[0].equalsIgnoreCase("reload"))
                 {
                     plugin.reloadConfig();
                     sender.sendMessage(String.format("%s[%s] Config successfully reloaded!", ChatColor.GREEN, plugin.getName()));
                     return true;
-                }
-                else if (args[0].equalsIgnoreCase("unload"))
+                } else if (args[0].equalsIgnoreCase("unload"))
                 {
                     sender.sendMessage(String.format("%s[%s] Unloading...", ChatColor.GREEN, plugin.getName()));
                     plugin.getPluginLoader().disablePlugin(plugin);
                     return true;
-                }
-                else
+                } else
                 {
                     sender.sendMessage(String.format("%s[%s] Argument not recognised.", ChatColor.RED, plugin.getName()));
                     sender.sendMessage(String.format("%s/ndcustom [reload|unload]", ChatColor.RED));
