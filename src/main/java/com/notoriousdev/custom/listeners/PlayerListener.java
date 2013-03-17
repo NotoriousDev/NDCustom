@@ -53,19 +53,19 @@ public class PlayerListener implements Listener
         }
         if (item.getType() == Material.WRITTEN_BOOK)
         {
-           /*
-            BookMeta bm = (BookMeta) item.getItemMeta();
-            if (cfg.getStringList("messages.alerts.books").contains(bm.getTitle()))
-            {
-                for (Player staff : plugin.getServer().getOnlinePlayers())
-                {
-                    if (Permissions.BOOK.isAuthorised(staff))
-                    {
-                        staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
-                    }
-                }
-            }
-            */
+            /*
+             BookMeta bm = (BookMeta) item.getItemMeta();
+             if (cfg.getStringList("messages.alerts.books").contains(bm.getTitle()))
+             {
+             for (Player staff : plugin.getServer().getOnlinePlayers())
+             {
+             if (Permissions.BOOK.isAuthorised(staff))
+             {
+             staff.sendMessage(ChatColor.DARK_RED + "[ALERT] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + event.getPlayer().getName() + " is reading a book...");
+             }
+             }
+             }
+             */
         }
     }
 
@@ -138,9 +138,9 @@ public class PlayerListener implements Listener
             {
                 int dmg = player.getLastDamageCause().getDamage();
                 float dist = player.getFallDistance();
-                double velocity = Math.sqrt(2*9.81*dist * 72);
+                double velocity = Math.sqrt(2 * 9.81 * dist * 72);
                 String svel = String.valueOf(velocity);
-                svel = svel.length() > 5 ? svel.substring(0,5) : svel;
+                svel = svel.length() > 5 ? svel.substring(0, 5) : svel;
                 String sdist = String.valueOf(Math.floor(dist));
                 event.setDeathMessage(ChatColor.RED + "[DEATH] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " fell " + sdist + " blocks, and took " + svel + " joules to the feet");
             }
@@ -164,12 +164,12 @@ public class PlayerListener implements Listener
         String message = event.getMessage();
 
         /*
-        Should shut caps spammers up
-        if(message.length() > 6)
-        {
-                ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
-        }
-        */
+         Should shut caps spammers up
+         if(message.length() > 6)
+         {
+         ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
+         }
+         */
 
         if (Permissions.CHAT_BYPASS.isAuthorised(player))
         {
