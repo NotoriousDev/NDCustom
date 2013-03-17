@@ -44,7 +44,8 @@ public class Utils
             {
                 result += line;
             }
-        } finally
+        }
+        finally
         {
             if (in != null)
             {
