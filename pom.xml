@@ -46,6 +46,7 @@
     </dependencies>
 
     <!--Don't edit this-->
+    <!--Fuck you, I do what I want-->
     <build>
         <directory>target</directory>
         <outputDirectory>target/classes</outputDirectory>

@@ -75,6 +75,13 @@ itemblock:
     - egg
     - eye_of_ender
     - ender_pearl
+    - fireball
+    - minecart
+    - tnt_minecart
+    - hopper_minecart
+    - storage_minecart
+    - powered_minecart
+    - boat
   throw:
     - potion
     - exp_bottle
@@ -84,3 +91,10 @@ itemblock:
     - monster_eggs
     - eye_of_ender
     - ender_pearl
+    - fireball
+    - minecart
+    - tnt_minecart
+    - hopper_minecart
+    - storage_minecart
+    - powered_minecart
+    - boat
