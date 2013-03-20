@@ -139,10 +139,13 @@ public class PlayerListener implements Listener
                 int dmg = player.getLastDamageCause().getDamage();
                 float dist = player.getFallDistance();
                 double velocity = Math.sqrt(2 * 9.81 * dist * 72);
+                double joules = 9.81 * 72 * dist;
+                String sjoules = String.valueOf(joules);
                 String svel = String.valueOf(velocity);
                 svel = svel.length() > 5 ? svel.substring(0, 5) : svel;
+                sjoules = sjoules.length() > 5 ? sjoules.substring(0, 5) : sjoules;
                 String sdist = String.valueOf(Math.floor(dist));
-                event.setDeathMessage(ChatColor.RED + "[DEATH] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " fell " + sdist + " blocks, and took " + svel + " joules to the feet");
+                event.setDeathMessage(ChatColor.RED + "[DEATH] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " fell " + sdist + " blocks, and took " + sjoules + " joules to the feet");
             }
             else
             {
