@@ -98,3 +98,4 @@ itemblock:
     - storage_minecart
     - powered_minecart
     - boat
+show-kick-messages: false

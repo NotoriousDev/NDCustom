@@ -3,6 +3,7 @@ package com.notoriousdev.custom.listeners;
 import com.notoriousdev.custom.NDCustom;
 import com.notoriousdev.custom.Permissions;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -35,6 +36,14 @@ public class ServerListener implements Listener
     @EventHandler
     public void onPlayerKick(final PlayerKickEvent event)
     {
+        for (Player player : plugin.getServer().getOnlinePlayers())
+        {
+            if (plugin.getConfig().getBoolean("show-kick-messages") && Permissions.KICK_NOTIFY.isAuthorised(player))
+            {
+                player.sendMessage(ChatColor.GREEN + event.getPlayer().getDisplayName() + " kicked: ");
+                player.sendMessage(ChatColor.RED + event.getLeaveMessage());
+            }
+        }
         event.setLeaveMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.kick").replace("{PLAYER}", event.getPlayer().getDisplayName())));
     }
 

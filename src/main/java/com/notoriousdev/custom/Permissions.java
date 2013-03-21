@@ -9,6 +9,7 @@ public enum Permissions
     CHAT,
     CHAT_BYPASS,
     BYPASS,
+    KICK_NOTIFY,
     BOOK,
     COMMAND_OP,
     COMMAND_DEOP,
