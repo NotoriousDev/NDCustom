@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -41,11 +42,11 @@ public class PlayerListener implements Listener
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onItemThrow(PlayerInteractEvent event)
+    public void onItemUse(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
-        if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())))
+        if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())) && (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR))
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use " + item.getType()
