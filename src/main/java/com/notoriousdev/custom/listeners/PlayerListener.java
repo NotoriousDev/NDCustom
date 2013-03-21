@@ -46,6 +46,10 @@ public class PlayerListener implements Listener
     {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
+        if (Permissions.BYPASS.isAuthorised(player))
+        {
+            return;
+        }
         if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.throw").contains(item.getType().toString().toLowerCase())) && (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR))
         {
             event.setCancelled(true);
@@ -76,6 +80,10 @@ public class PlayerListener implements Listener
         if (event.getEntity() instanceof Player)
         {
             Player player = (Player) event.getEntity();
+            if (Permissions.BYPASS.isAuthorised(player))
+            {
+                return;
+            }
             if (player.getGameMode() == GameMode.CREATIVE)
             {
                 event.setCancelled(true);
@@ -89,6 +97,10 @@ public class PlayerListener implements Listener
     {
         if (event.getPlayer().getGameMode() == GameMode.CREATIVE)
         {
+            if (Permissions.BYPASS.isAuthorised(event.getPlayer()))
+            {
+                return;
+            }
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop items in creative because people spam them!");
         }
@@ -98,6 +110,10 @@ public class PlayerListener implements Listener
     public void onDispenserInteract(InventoryClickEvent event)
     {
         Player player = (Player) event.getWhoClicked();
+        if (Permissions.BYPASS.isAuthorised(player))
+        {
+            return;
+        }
         ItemStack item = event.getCurrentItem();
         if (item != null && player.getGameMode() == GameMode.CREATIVE
                 && event.getInventory().getType() == InventoryType.DISPENSER
@@ -117,6 +133,10 @@ public class PlayerListener implements Listener
         if (event.getDamager() instanceof Player)
         {
             Player player = (Player) event.getDamager();
+            if (Permissions.BYPASS.isAuthorised(player))
+            {
+                return;
+            }
             if (player.getGameMode() == GameMode.CREATIVE)
             {
                 event.setCancelled(true);
@@ -175,7 +195,7 @@ public class PlayerListener implements Listener
          }
          */
 
-        if (Permissions.CHAT_BYPASS.isAuthorised(player))
+        if (Permissions.CHAT_BYPASS.isAuthorised(player) || Permissions.BYPASS.isAuthorised(player))
         {
             return;
         }
