@@ -241,6 +241,7 @@ public class PlayerListener implements Listener
         {
             ((ItemFrame)event.getEntity()).setItem(null);
         }
+        event.getEntity().remove();
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -250,5 +251,6 @@ public class PlayerListener implements Listener
         {
             ((ItemFrame)event.getEntity()).setItem(null);
         }
+        event.getEntity().remove();
     }
 }
