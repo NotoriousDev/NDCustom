@@ -5,6 +5,7 @@ import com.notoriousdev.custom.Permissions;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,6 +15,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -228,6 +231,24 @@ public class PlayerListener implements Listener
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
             plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onHangingBreak(HangingBreakEvent event)
+    {
+        if(event.getEntity() instanceof  ItemFrame)
+        {
+            ((ItemFrame)event.getEntity()).setItem(null);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEntityHangingBreak(HangingBreakByEntityEvent event)
+    {
+        if(event.getEntity() instanceof  ItemFrame)
+        {
+            ((ItemFrame)event.getEntity()).setItem(null);
         }
     }
 }
