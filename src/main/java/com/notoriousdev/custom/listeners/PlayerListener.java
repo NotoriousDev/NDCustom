@@ -7,6 +7,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -237,9 +238,9 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onHangingBreak(HangingBreakEvent event)
     {
-        if(event.getEntity() instanceof  ItemFrame)
+        if (event.getEntity() instanceof ItemFrame)
         {
-            ((ItemFrame)event.getEntity()).setItem(null);
+            ((ItemFrame) event.getEntity()).setItem(null);
         }
         event.getEntity().remove();
     }
@@ -247,9 +248,14 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityHangingBreak(HangingBreakByEntityEvent event)
     {
-        if(event.getEntity() instanceof  ItemFrame)
+        if (event.getRemover() instanceof TNTPrimed)
         {
-            ((ItemFrame)event.getEntity()).setItem(null);
+            event.setCancelled(true);
+            return;
+        }
+        if (event.getEntity() instanceof ItemFrame)
+        {
+            ((ItemFrame) event.getEntity()).setItem(null);
         }
         event.getEntity().remove();
     }
