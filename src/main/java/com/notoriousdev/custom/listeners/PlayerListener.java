@@ -5,6 +5,7 @@ import com.notoriousdev.custom.Permissions;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -12,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -43,6 +45,23 @@ public class PlayerListener implements Listener
     {
         this.plugin = plugin;
         this.cfg = plugin.getConfig();
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBlockPlace(BlockPlaceEvent event)
+    {
+        Player player = event.getPlayer();
+        Block block = event.getBlockPlaced();
+        if (Permissions.BYPASS.isAuthorised(player))
+        {
+            return;
+        }
+        if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.place").contains(block.getType().toString().toLowerCase())))
+        {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot place " + block.getType()
+                    .name().toLowerCase().replace("_", " ") + "s in creative!");
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

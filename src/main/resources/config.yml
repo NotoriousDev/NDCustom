@@ -98,4 +98,7 @@ itemblock:
     - storage_minecart
     - powered_minecart
     - boat
+  place:
+    - sponge
+
 show-kick-messages: false
