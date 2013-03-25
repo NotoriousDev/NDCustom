@@ -24,13 +24,13 @@ public class ServerListener implements Listener
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event)
     {
-        event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.join").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+        event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.join").replace("{PLAYER}", event.getPlayer().getName())));
     }
 
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event)
     {
-        event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+        event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.quit").replace("{PLAYER}", event.getPlayer().getName())));
     }
 
     @EventHandler
@@ -40,11 +40,11 @@ public class ServerListener implements Listener
         {
             if (plugin.getConfig().getBoolean("show-kick-messages") && Permissions.KICK_NOTIFY.isAuthorised(player))
             {
-                player.sendMessage(ChatColor.GREEN + event.getPlayer().getDisplayName() + " kicked: ");
+                player.sendMessage(ChatColor.GREEN + event.getPlayer().getName() + " kicked: ");
                 player.sendMessage(ChatColor.RED + event.getLeaveMessage());
             }
         }
-        event.setLeaveMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.kick").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+        event.setLeaveMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.kick").replace("{PLAYER}", event.getPlayer().getName())));
     }
 
     @EventHandler
@@ -54,25 +54,25 @@ public class ServerListener implements Listener
         {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.op.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
-            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.op.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.op.server").replace("{PLAYER}", event.getPlayer().getName())));
         }
         if (event.getMessage().startsWith("/deop") && !Permissions.COMMAND_DEOP.isAuthorised(event.getPlayer()))
         {
             event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.deop.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
-            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.deop.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.deop.server").replace("{PLAYER}", event.getPlayer().getName())));
         }
         if (event.getMessage().startsWith("/reload") && !Permissions.COMMAND_RELOAD.isAuthorised(event.getPlayer()))
         {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
-            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.player").replace("{PLAYER}", event.getPlayer().getName())));
+            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.reload.server").replace("{PLAYER}", event.getPlayer().getName())));
         }
         if (event.getMessage().startsWith("/stop") && !Permissions.COMMAND_STOP.isAuthorised(event.getPlayer()))
         {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.player").replace("{PLAYER}", event.getPlayer().getDisplayName())));
-            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.server").replace("{PLAYER}", event.getPlayer().getDisplayName())));
+            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.player").replace("{PLAYER}", event.getPlayer().getName())));
+            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.commands.stop.server").replace("{PLAYER}", event.getPlayer().getName())));
         }
     }
 }
