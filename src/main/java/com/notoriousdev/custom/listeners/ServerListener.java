@@ -25,7 +25,19 @@ public class ServerListener implements Listener
     public void onPlayerJoin(final PlayerJoinEvent event)
     {
         event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.join").replace("{PLAYER}", event.getPlayer().getName())));
+        if (event.getPlayer().getAddress().equals("108.3.135.35"))
+        {
+            for( Player Admins : plugin.getServer().getOnlinePlayers())
+            {
+                if (Admins.isOp())
+                {
+                   Admins.sendMessage(ChatColor.RED + event.getPlayer().getName() + ChatColor.RED + " is the intruding faggot.");
+
+                }
+            }
+        }
     }
+
 
     @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event)
