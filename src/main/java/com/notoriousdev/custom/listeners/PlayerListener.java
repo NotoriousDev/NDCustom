@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -13,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -285,6 +287,16 @@ public class PlayerListener implements Listener
     {
         if (event.getDestination().getType() == InventoryType.DISPENSER || event.getDestination().getType() == InventoryType.DROPPER)
         {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onChestBreak(BlockBreakEvent event)
+    {
+        if (event.getBlock().getType() == Material.CHEST)
+        {
+            event.getBlock().setType(Material.AIR);
             event.setCancelled(true);
         }
     }
