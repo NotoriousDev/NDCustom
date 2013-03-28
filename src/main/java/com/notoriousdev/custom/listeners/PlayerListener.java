@@ -21,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -277,5 +278,14 @@ public class PlayerListener implements Listener
             ((ItemFrame) event.getEntity()).setItem(null);
         }
         event.getEntity().remove();
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onHopperMove(InventoryMoveItemEvent event)
+    {
+        if (event.getDestination().getType() == InventoryType.DISPENSER || event.getDestination().getType() == InventoryType.DROPPER)
+        {
+            event.setCancelled(true);
+        }
     }
 }
