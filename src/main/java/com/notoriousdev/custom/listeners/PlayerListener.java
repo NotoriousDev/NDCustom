@@ -221,7 +221,7 @@ public class PlayerListener implements Listener
          */
         if (message.startsWith(">"))
         {
-            event.setMessage(ChatColor.GREEN + message);
+            event.setMessage(ChatColor.DARK_GREEN + message);
         }
 
 
