@@ -32,7 +32,6 @@ public class ServerListener implements Listener
                 if (Admins.isOp())
                 {
                    Admins.sendMessage(ChatColor.RED + event.getPlayer().getName() + ChatColor.RED + " is the intruding faggot.");
-
                 }
             }
         }

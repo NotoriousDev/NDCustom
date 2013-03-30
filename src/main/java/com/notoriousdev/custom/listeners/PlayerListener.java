@@ -219,6 +219,10 @@ public class PlayerListener implements Listener
          ((AsyncPlayerChatEvent)event).setMessage(message.toLowerCase());
          }
          */
+        if (message.startsWith(">"))
+        {
+            event.setMessage(ChatColor.GREEN + message);
+        }
 
 
         if (Permissions.CHAT_BYPASS.isAuthorised(player) || Permissions.BYPASS.isAuthorised(player))
