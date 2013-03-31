@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -204,6 +205,27 @@ public class PlayerListener implements Listener
         {
             // Random death messages? Random death messages.
             event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
+        }
+    }
+
+    @EventHandler
+    public void onSignChange(SignChangeEvent event)
+    {
+        if (event.getLine(1).toString().startsWith(">"))
+        {
+            event.setLine(1, ChatColor.DARK_GREEN + event.getLine(1));
+        }
+        if (event.getLine(2).toString().startsWith(">"))
+        {
+            event.setLine(2, ChatColor.DARK_GREEN + event.getLine(2));
+        }
+        if (event.getLine(3).toString().startsWith(">"))
+        {
+            event.setLine(3, ChatColor.DARK_GREEN + event.getLine(3));
+        }
+        if (event.getLine(4).toString().startsWith(">"))
+        {
+            event.setLine(4, ChatColor.DARK_GREEN + event.getLine(4));
         }
     }
 
