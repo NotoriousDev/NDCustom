@@ -211,21 +211,21 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onSignChange(SignChangeEvent event)
     {
-        if (event.getLine(1).toString().startsWith(">"))
+        if (event.getLine(0).startsWith(">"))
+        {
+            event.setLine(0, ChatColor.DARK_GREEN + event.getLine(0));
+        }
+        if (event.getLine(1).startsWith(">"))
         {
             event.setLine(1, ChatColor.DARK_GREEN + event.getLine(1));
         }
-        if (event.getLine(2).toString().startsWith(">"))
+        if (event.getLine(2).startsWith(">"))
         {
             event.setLine(2, ChatColor.DARK_GREEN + event.getLine(2));
         }
-        if (event.getLine(3).toString().startsWith(">"))
+        if (event.getLine(3).startsWith(">"))
         {
             event.setLine(3, ChatColor.DARK_GREEN + event.getLine(3));
-        }
-        if (event.getLine(4).toString().startsWith(">"))
-        {
-            event.setLine(4, ChatColor.DARK_GREEN + event.getLine(4));
         }
     }
 
