@@ -311,7 +311,11 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onHopperMove(InventoryMoveItemEvent event)
     {
-        if (event.getDestination().getType() == InventoryType.DISPENSER || event.getDestination().getType() == InventoryType.DROPPER)
+        if (event.getSource().getType() != InventoryType.HOPPER)
+        {
+            return;
+        }
+        if ((cfg.getList("itemblock.dispenser").contains(event.getItem().getType().toString().toLowerCase())))
         {
             event.setCancelled(true);
         }
