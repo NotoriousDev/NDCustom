@@ -67,6 +67,20 @@ public class PlayerListener implements Listener
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
         }
     }
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+
+        Player player = event.getPlayer();
+        
+        if (Permissions.BYPASS.isAuthorised(player))
+        {
+            return;
+        }
+        if(event.getBlock().getY() == 0) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot break through the world!");
+        }
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onItemUse(PlayerInteractEvent event)
