@@ -67,16 +67,19 @@ public class PlayerListener implements Listener
                     .name().toLowerCase().replace("_", " ") + "s in creative!");
         }
     }
+
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
+    public void onBlockBreak(BlockBreakEvent event)
+    {
 
         Player player = event.getPlayer();
-        
+
         if (Permissions.BYPASS.isAuthorised(player))
         {
             return;
         }
-        if(event.getBlock().getY() == 0) {
+        if (event.getBlock().getY() == 0)
+        {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot break through the world!");
         }
@@ -195,8 +198,7 @@ public class PlayerListener implements Listener
             if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID)
             {
                 event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.skyblock-fall").replace("{PLAYER}", player.getDisplayName())));
-            }
-            else if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL)
+            } else if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL)
             {
                 int dmg = player.getLastDamageCause().getDamage();
                 float dist = player.getFallDistance();
@@ -208,14 +210,12 @@ public class PlayerListener implements Listener
                 sjoules = sjoules.length() > 5 ? sjoules.substring(0, 5) : sjoules;
                 String sdist = String.valueOf(Math.floor(dist));
                 event.setDeathMessage(ChatColor.RED + "[DEATH] " + ChatColor.DARK_GRAY + "|| " + ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " fell " + sdist + " blocks, and took " + sjoules + " joules to the feet");
-            }
-            else
+            } else
             {
                 // Random death messages? Random death messages.
                 event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
             }
-        }
-        else
+        } else
         {
             // Random death messages? Random death messages.
             event.setDeathMessage(ChatColor.translateAlternateColorCodes('&', cfg.getString("messages.generic-death").replace("{PLAYER}", player.getDisplayName())));
@@ -274,8 +274,7 @@ public class PlayerListener implements Listener
                 {
                     // Allow chat
                     lastMessage.put(player, current);
-                }
-                else
+                } else
                 {
                     // Deny chat
                     event.setCancelled(true);
@@ -283,13 +282,11 @@ public class PlayerListener implements Listener
                     player.sendMessage(ChatColor.GREEN + "We do this to prevent spam.");
                     plugin.getLogger().info(player.getName() + " tried to chat but was blocked!");
                 }
-            }
-            else
+            } else
             {
                 lastMessage.put(player, current);
             }
-        }
-        else
+        } else
         {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "YOU SHALL NOT SPEAK!");
