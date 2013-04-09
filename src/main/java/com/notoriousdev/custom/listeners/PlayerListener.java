@@ -1,5 +1,6 @@
 package com.notoriousdev.custom.listeners;
 
+import me.confuserr.banmanager.BmAPI;
 import com.notoriousdev.custom.NDCustom;
 import com.notoriousdev.custom.Permissions;
 import org.bukkit.ChatColor;
@@ -59,6 +60,13 @@ public class PlayerListener implements Listener
         if (Permissions.BYPASS.isAuthorised(player))
         {
             return;
+        }
+        if (BmAPI.isMuted(player.getName()) && (event.getBlock().equals(Material.SIGN)
+                || (event.getBlock().equals(Material.SIGN_POST)
+                || (event.getBlock().equals(Material.WALL_SIGN)))))
+        {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot place signs while muted!");
         }
         if (player.getGameMode() == GameMode.CREATIVE && (cfg.getList("itemblock.place").contains(block.getType().toString().toLowerCase())))
         {
